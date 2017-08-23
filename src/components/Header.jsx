@@ -1,11 +1,11 @@
 import React from "react";
 
-function Header(props){
+function Header(){
   return (
     <div>
       <h1>Help Queue</h1>
-    </div>
-   );
+      </div>
+  );
 }
 
 export default Header;

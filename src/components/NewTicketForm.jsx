@@ -8,7 +8,7 @@ class NewTicketForm extends React.Component{
     this.handleNewTicketFormSubmission = this.handleNewTicketFormSubmission.bind(this);
   }
   handleNewTicketFormSubmission(event) {
-    event.preventDefault()
+    event.preventDefault();
     const { _names, _location, _issue } = this.refs;
     var newTicket = new Ticket(_names.value, _location.value, _issue.value);
     this.props.onNewTicketCreation(newTicket);
@@ -19,12 +19,12 @@ class NewTicketForm extends React.Component{
     return (
       <div>
         <form onSubmit={this.handleNewTicketFormSubmission}>
-          <input
-            ref="_names"
+              <input
+                ref="_names"
             type="text"
-            id="names"
-            placeholder="Pair Names"/>
-          <input
+                id="names"
+                placeholder="Pair Names"/>
+              <input
             ref="_location"
             type="text"
             id="location"
@@ -35,8 +35,8 @@ class NewTicketForm extends React.Component{
             id="issue"
             placeholder="Describe your issue."/>
           <button type="submit">Help!</button>
-        </form>
-      </div>
+          </form>
+        </div>
     );
   }
 
@@ -45,6 +45,6 @@ class NewTicketForm extends React.Component{
 NewTicketForm.propTypes = {
   onNewTicketCreation: PropTypes.func,
   hideFormAfterSubmission: PropTypes.func
-}
+};
 
 export default NewTicketForm;

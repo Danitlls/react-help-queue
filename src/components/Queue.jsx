@@ -2,29 +2,79 @@ import React from "react";
 import TicketList from './TicketList';
 import NewTicketControl from './NewTicketControl';
 
-class Queue extends React.Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      masterTicketList: [],
-    };
-    this.addNewTicketToList = this.addNewTicketToList.bind(this);
-  }
+class Queue extends React.Component {
 
-  addNewTicketToList(newTicket){
-    var newMasterTicketList = this.state.masterTicketList.slice();
-    newMasterTicketList.push(newTicket);
-    this.setState({masterTicketList: newMasterTicketList});
-  }
+ constructor(props) {
+   console.log('constructor');
+   super(props);
+   this.state = {
+     masterTicketList: [],
+   };
+   this.addNewTicketToList = this.addNewTicketToList.bind(this);
+   this.updateTicketTimeSinceOpened = this.updateTicketTimeSinceOpened.bind(this);
+ }
 
-  render(){
-    return (
-      <div>
-        <TicketList ticketList = {this.state.masterTicketList}/>
-        <NewTicketControl onNewTicketCreation= {this.addNewTicketToList}/>
-      </div>
-    );
-  }
+ componentWillMount() {
+   console.log('componentWillMount');
+ }
+
+
+ componentDidMount() {
+   console.log('componentDidMount');
+   this.timeSinceOpenedChecker = setInterval(() =>
+     this.updateTicketTimeSinceOpened(),
+     5000
+   );
+ }
+
+ componentWillReceiveProps() {
+   console.log('componentWillReceiveProps');
+ }
+
+ shouldComponentUpdate() {
+   console.log('shouldComponentUpdate');
+   return true;
+ }
+
+ componentWillUpdate() {
+   console.log('componentWillUpdate');
+ }
+
+ componentDidUpdate() {
+   console.log('componentDidUpdate');
+ }
+
+ componentWillUnmount(){
+   clearInterval(this.timeSinceOpenedChecker);
+ }
+
+ addNewTicketToList(newTicket){
+   let newMasterTicketList = this.state.masterTicketList.slice();
+   newMasterTicketList.push(newTicket);
+   console.log('setState');
+   this.setState({masterTicketList: newMasterTicketList});
+ }
+
+ updateTicketTimeSinceOpened() {
+   let newMasterTicketList = this.state.masterTicketList.slice();
+   newMasterTicketList.forEach((ticket) =>
+     ticket.setTimeSinceOpened()
+   );
+   console.log('setState');
+   this.setState({masterTicketList:newMasterTicketList})
+ }
+
+ render() {
+   console.log('render');
+   return (
+     <div>
+       <TicketList
+           ticketList = {this.state.masterTicketList}/>
+       <NewTicketControl
+           onNewTicketCreation= {this.addNewTicketToList}/>
+     </div>
+   );
+ }
 }
 
 export default Queue;
