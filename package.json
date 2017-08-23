@@ -4,13 +4,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":  "webpack-dev-server"
+    "start": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
+    "react-bootstrap": "^0.31.2",
     "react-dom": "^15.5.4"
   },
   "devDependencies": {
